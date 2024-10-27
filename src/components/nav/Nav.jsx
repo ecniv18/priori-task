@@ -4,8 +4,12 @@ import LIBRARY from "../../modules/library";
 import Project from "./Project";
 import ProjectForm from "./Project-form";
 
-export default function Nav() {
-  const [projectList, setProjectList] = useState(LIBRARY.getProject());
+export default function Nav({
+  projectList,
+  createProject,
+  setActiveProject,
+  deleteProject,
+}) {
   const [isProjectFormOpen, setIsProjectFormOpen] = useState(false);
 
   function openProjectForm() {
@@ -14,25 +18,6 @@ export default function Nav() {
 
   function closeProjectForm() {
     setIsProjectFormOpen(false);
-  }
-
-  function createProject(name) {
-    LIBRARY.createProject(name);
-    reRenderProjectList();
-  }
-
-  function setActiveProject(id) {
-    LIBRARY.setActiveProject(id);
-    reRenderProjectList();
-  }
-
-  function deleteProject(id) {
-    LIBRARY.deleteProject(id);
-    reRenderProjectList();
-  }
-
-  function reRenderProjectList() {
-    setProjectList(LIBRARY.getProject());
   }
 
   return (
@@ -52,7 +37,9 @@ export default function Nav() {
             key={proj.id}
             {...proj}
             deleteProject={deleteProject}
-            setActiveProject={setActiveProject}
+            setActiveProject={() => {
+              setActiveProject(proj.id);
+            }}
           />
         ))}
       </ul>

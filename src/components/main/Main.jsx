@@ -1,23 +1,78 @@
-import Todo from "./Todo";
 import LIBRARY from "../../modules/library";
+import Nav from "../nav/Nav";
+import { useState } from "react";
+import TaskForm from "./Task-form";
+import Task from "./Task";
 
-export default function Main({ children }) {
-  const todos = LIBRARY.getTodos(LIBRARY.getActiveProject().id);
+export default function Main() {
+  const [tasks, setTasks] = useState(LIBRARY.getTasks());
+  const [isTaskFormOpen, setIsTaskFormOpen] = useState(false);
+  const [projectList, setProjectList] = useState(LIBRARY.getProject());
+
+  function createProject(name) {
+    LIBRARY.createProject(name);
+    scanProjects();
+  }
+
+  function createTask(value) {
+    LIBRARY.createTask(value);
+    scanTasks();
+  }
+
+  function deleteProject(id) {
+    LIBRARY.deleteProject(id);
+    scanProjects();
+    scanTasks();
+  }
+
+  function setActiveProject(id) {
+    LIBRARY.setActiveProject(id);
+    scanProjects();
+    scanTasks();
+  }
+
+  function scanProjects() {
+    setProjectList(LIBRARY.getProject());
+  }
+
+  function scanTasks() {
+    setTasks(LIBRARY.getTasks(LIBRARY.getActiveProject().id));
+  }
 
   return (
     <main className='main'>
-      {children}
-      <section className='todo_list'>{displayTodos(todos)}</section>
+      <Nav
+        createProject={createProject}
+        setActiveProject={setActiveProject}
+        projectList={projectList}
+        deleteProject={deleteProject}
+      />
+
+      <section className='todo_list'>
+        {isTaskFormOpen && (
+          <TaskForm
+            createTask={createTask}
+            closeForm={() => setIsTaskFormOpen(false)}
+          />
+        )}
+        <button
+          onClick={() => setIsTaskFormOpen(true)}
+          className='main-task_form_button'
+        >
+          New Task
+        </button>
+        <TaskLists tasks={tasks} />
+      </section>
     </main>
   );
 }
 
-function displayTodos(todos) {
+function TaskLists({ tasks }) {
   return (
     <>
-      {todos.length > 0
-        ? todos.forEach((todo) => <Todo {...todo} />)
-        : "Empty Todos"}
+      {tasks.length > 0
+        ? tasks.map((task) => <Task key={task.id} {...task} />)
+        : "Empty Project"}
     </>
   );
 }
