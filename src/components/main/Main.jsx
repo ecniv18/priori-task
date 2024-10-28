@@ -1,3 +1,4 @@
+import "./style.css";
 import LIBRARY from "../../modules/library";
 import Nav from "../nav/Nav";
 import { useState } from "react";
@@ -12,6 +13,7 @@ export default function Main() {
   function createProject(name) {
     LIBRARY.createProject(name);
     scanProjects();
+    scanTasks();
   }
 
   function createTask(value) {
@@ -19,9 +21,20 @@ export default function Main() {
     scanTasks();
   }
 
-  function deleteProject(id) {
-    LIBRARY.deleteProject(id);
+  function deleteProject(projectId) {
+    LIBRARY.deleteProject(projectId);
     scanProjects();
+    scanTasks();
+  }
+
+  function deleteTask(taskId) {
+    LIBRARY.deleteTask(taskId);
+    scanProjects();
+    scanTasks();
+  }
+
+  function editTask(taskId, value) {
+    LIBRARY.editTask(taskId, value);
     scanTasks();
   }
 
@@ -48,11 +61,12 @@ export default function Main() {
         deleteProject={deleteProject}
       />
 
-      <section className='todo_list'>
+      <section className='task_section'>
         {isTaskFormOpen && (
           <TaskForm
             createTask={createTask}
             closeForm={() => setIsTaskFormOpen(false)}
+            mode='create'
           />
         )}
         <button
@@ -61,18 +75,35 @@ export default function Main() {
         >
           New Task
         </button>
-        <TaskLists tasks={tasks} />
+        <div className='task_list'>
+          <TaskLists
+            tasks={tasks}
+            deleteTask={deleteTask}
+            editTask={editTask}
+          />
+        </div>
       </section>
     </main>
   );
 }
 
-function TaskLists({ tasks }) {
+function TaskLists({ tasks, deleteTask, editTask }) {
   return (
     <>
-      {tasks.length > 0
-        ? tasks.map((task) => <Task key={task.id} {...task} />)
-        : "Empty Project"}
+      {tasks.length > 0 ? (
+        tasks.map((task) => (
+          <Task
+            key={task.id}
+            {...task}
+            deleteTask={deleteTask}
+            editTask={editTask}
+          />
+        ))
+      ) : (
+        <div className='no_task_msg box'>
+          <h3>No Tasks Yet</h3>
+        </div>
+      )}
     </>
   );
 }

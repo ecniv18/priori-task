@@ -5,8 +5,8 @@ const LIBRARY = (function () {
   /**
    * manual initiation of default project becuase it is different from the actual
    * Project Object
-   * default project will hold all the Task Ojects while the Task object will be the one that holds the ID * of the Project that it supposed to be in.
-   * by doing it this way saves a few memory in exchange for performance although the App won't need a lot * of performance anyway, so it's worth it
+   * default project will hold all the Task Ojects while the Task object will be the one that holds the ID
+   * of the Project that it supposed to be in.
    */
   if (localStorage.length === 0) {
     localStorage.library = JSON.stringify([
@@ -78,6 +78,26 @@ const LIBRARY = (function () {
     }
   }
 
+  function deleteTask(id) {
+    library[0].tasks = library[0].tasks.filter((task) => task.id !== id);
+    updateLibrary(library);
+  }
+
+  function editTask(id, value) {
+    library[0].tasks = library[0].tasks.map((task) => {
+      if (task.id === id) {
+        console.log(task.id === id);
+        task.title = value.title;
+        task.description = value.description;
+        task.dueDate = value.dueDate;
+        task.priority = value.priority;
+      }
+      return task;
+    });
+
+    updateLibrary(library);
+  }
+
   function setActiveProject(id) {
     /**
      * map out the current project array and change the target project's active status, then update the
@@ -129,6 +149,8 @@ const LIBRARY = (function () {
     getActiveProject,
     getTasks,
     deleteProject,
+    deleteTask,
+    editTask,
   };
 })();
 

@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-export default function TaskForm({ closeForm, createTask }) {
+export default function TaskForm({
+  closeForm,
+  createTask,
+  editTask,
+  mode,
+  taskId,
+}) {
   const currentDate = new Date().toISOString().slice(0, 10);
   const [title, setTitle] = useState({ value: "", length: 0 });
   const [description, setDescription] = useState({ value: "", length: 0 });
@@ -23,32 +29,36 @@ export default function TaskForm({ closeForm, createTask }) {
     setPriority({ value: e.target.value });
   }
   return (
-    <form className='form'>
-      <span className='form-title_counter'>{title.length}</span>
+    <form className='task_form form box'>
+      <span className='task_form-title_counter counter'>
+        {title.length} / 20
+      </span>
       <input
         onChange={(e) => titleOnChange(e)}
-        className='form-title_input'
+        className='task_form-title_input'
         type='text'
         value={title.value}
-        maxLength={17}
+        maxLength={20}
       />
-      <span className='form-desc_counter'>{description.length}</span>
+      <span className='task_form-desc_counter counter'>
+        {description.length} / 150
+      </span>
       <textarea
         onChange={(e) => descOnChange(e)}
-        className='form-description'
+        className='task_form-description'
         value={description.value}
-        maxLength={100}
+        maxLength={250}
       ></textarea>
-      <div className='form-other_input'>
+      <div className='task_form-other_input'>
         <input
           onChange={(e) => dueDateOnChange(e)}
-          className='form-date_input'
+          className='task_form-date_input'
           type='date'
           value={dueDate.value}
         />
         <select
           onChange={(e) => priorityOnChange(e)}
-          className='form-priority_input'
+          className='task_form-priority_input'
           value={priority.value}
         >
           <option value='high'>High</option>
@@ -59,23 +69,34 @@ export default function TaskForm({ closeForm, createTask }) {
       <button
         onClick={(e) => {
           e.preventDefault();
-          createTask({
-            title: title.value,
-            description: description.value,
-            dueDate: dueDate.value,
-            priority: priority.value,
-          });
+          if (mode === "create") {
+            createTask({
+              title: title.value,
+              description: description.value,
+              dueDate: dueDate.value,
+              priority: priority.value,
+            });
+          } else if (mode === "edit") {
+            editTask(taskId, {
+              title: title.value,
+              description: description.value,
+              dueDate: dueDate.value,
+              priority: priority.value,
+            });
+          }
+
+          closeForm();
         }}
-        className='form-create_task_button'
+        className='task_form-create_task_button'
       >
-        Create Task
+        {mode === "create" ? "Create Task" : "Edit Task"}
       </button>
       <button
         onClick={(e) => {
           e.preventDefault();
           closeForm();
         }}
-        className='form-close_task_button'
+        className='task_form-close_task_button'
       >
         Close
       </button>

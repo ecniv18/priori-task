@@ -8,20 +8,21 @@ export default function Project({
   deleteProject,
 }) {
   return (
-    <li className='project'>
+    <li
+      className={active === true ? "nav-project box active" : "nav-project box"}
+    >
       <a
         href='#'
         onClick={() => {
           setActiveProject(id);
         }}
-        className='project_name'
+        className='nav-project_name'
       >
         {name}
-        {active === true && "*"}
       </a>
       {id !== 0 && (
         <button
-          className='delete_project'
+          className='nav-project_delete_button'
           // Directly delete the project from the LIBRARY
           onClick={() => deleteProject(id)}
         >

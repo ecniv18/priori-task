@@ -11,11 +11,14 @@ export default function ProjectForm({ closeFormFunc, createProject }) {
     if (!validateProjectInput(nameInput.value)) return;
     createProject(nameInput.value);
     setNameInputValue({ value: "", length: 0 });
+    closeFormFunc();
   }
 
   return (
-    <form className='project_form'>
-      <span className='project_form-counter'>{nameInput.length}</span>
+    <form className='project_form form box'>
+      <span className='project_form-counter counter'>
+        {nameInput.length} / 15
+      </span>
       <input
         onChange={(e) => {
           setNameInputValue({

@@ -31,7 +31,7 @@ export default function Nav({
       <button onClick={openProjectForm} className='nav-create_project_button'>
         New Project
       </button>
-      <ul className='project_list'>
+      <ul className='nav-project_list'>
         {projectList.map((proj) => (
           <Project
             key={proj.id}

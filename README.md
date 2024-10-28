@@ -12,11 +12,11 @@
   - [x] Mark the Active Project with "\*" for now
   - [ ] ...
 - Task
-  - [ ] Create Task action
-  - [ ] Delete Task action
-  - [ ] Edit Task action
-  - [ ] Complete Task action
-  - [ ] Show Active Project's Tasks on the Main
+  - [x] Create Task action
+  - [x] Delete Task action
+  - [x] Edit Task action
+  - [ ] Task Completion action
+  - [x] Show Active Project's Tasks on the Main
   - [ ] Mark Completed Task with something
   - [ ] Add filters (Incompleted, Completed, Missed, Priority)
   - [ ] ...
