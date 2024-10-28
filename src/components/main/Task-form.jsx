@@ -33,7 +33,11 @@ export default function TaskForm({
       <span className='task_form-title_counter counter'>
         {title.length} / 20
       </span>
+      <label htmlFor='title_input' className='title_label label'>
+        Title
+      </label>
       <input
+        id='title_input'
         onChange={(e) => titleOnChange(e)}
         className='task_form-title_input'
         type='text'
@@ -43,27 +47,46 @@ export default function TaskForm({
       <span className='task_form-desc_counter counter'>
         {description.length} / 150
       </span>
+      <label htmlFor='description_textarea' className='description_label label'>
+        Description
+      </label>
       <textarea
+        id='description_textarea'
         onChange={(e) => descOnChange(e)}
         className='task_form-description'
         value={description.value}
-        maxLength={250}
+        maxLength={150}
       ></textarea>
+
       <div className='task_form-other_input'>
+        <label htmlFor='due_date_date' className='due_date_label label'>
+          Due Date
+        </label>
         <input
+          id='due_date_date'
           onChange={(e) => dueDateOnChange(e)}
           className='task_form-date_input'
           type='date'
           value={dueDate.value}
         />
+        <label htmlFor='priority_select' className='priority_label label'>
+          Priority
+        </label>
         <select
+          id='priority_select'
           onChange={(e) => priorityOnChange(e)}
-          className='task_form-priority_input'
+          className={"task_form-priority_input " + priority.value + "_priority"}
           value={priority.value}
         >
-          <option value='high'>High</option>
-          <option value='normal'>Normal</option>
-          <option value='low'>Low</option>
+          <option className='high_priority' value='high'>
+            High
+          </option>
+          <option className='normal_priority' value='normal'>
+            Normal
+          </option>
+          <option className='low_priority' value='low'>
+            Low
+          </option>
         </select>
       </div>
       <button

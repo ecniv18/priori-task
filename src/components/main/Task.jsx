@@ -7,8 +7,10 @@ export default function Task({
   id,
   description,
   priority,
+  completed,
   deleteTask,
   editTask,
+  completeTask,
 }) {
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
 
@@ -21,7 +23,7 @@ export default function Task({
   }
 
   return (
-    <article id={id} className='task box'>
+    <article id={id} className={"task box " + priority + "_priority"}>
       {isEditFormOpen && (
         <TaskForm
           mode='edit'
@@ -31,12 +33,22 @@ export default function Task({
         />
       )}
       <div className='task_info'>
-        <h2 className='task_info-title'>{title}</h2>
-        <p className='task_info-description'>{description}</p>
+        <h2 className='task_info-title'>
+          {title.length === 0 ? "Untitled" : title}
+        </h2>
+        <p className='task_info-description'>
+          {description.length === 0 ? "No Task Description" : description}
+        </p>
         <span className='task_info-priority'>{priority}</span>
         <p className='task_info-due_date'>{dueDate}</p>
       </div>
       <div className='task_controls'>
+        <button
+          onClick={() => completeTask(id)}
+          className='task_controls-complete_button'
+        >
+          {completed ? "Completed" : "Incomplete"}
+        </button>
         <button onClick={openEditForm} className='task_controls-edit_button'>
           Edit
         </button>

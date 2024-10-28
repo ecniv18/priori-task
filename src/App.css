@@ -37,7 +37,8 @@ textarea {
   padding: 0.8rem;
 }
 
-.counter {
+.counter,
+.label {
   position: absolute;
   background-color: #fff;
   padding: 2px;

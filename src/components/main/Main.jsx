@@ -38,6 +38,11 @@ export default function Main() {
     scanTasks();
   }
 
+  function completeTask(taskId) {
+    LIBRARY.completeTask(taskId);
+    scanTasks();
+  }
+
   function setActiveProject(id) {
     LIBRARY.setActiveProject(id);
     scanProjects();
@@ -80,6 +85,7 @@ export default function Main() {
             tasks={tasks}
             deleteTask={deleteTask}
             editTask={editTask}
+            completeTask={completeTask}
           />
         </div>
       </section>
@@ -87,7 +93,7 @@ export default function Main() {
   );
 }
 
-function TaskLists({ tasks, deleteTask, editTask }) {
+function TaskLists({ tasks, deleteTask, editTask, completeTask }) {
   return (
     <>
       {tasks.length > 0 ? (
@@ -97,6 +103,7 @@ function TaskLists({ tasks, deleteTask, editTask }) {
             {...task}
             deleteTask={deleteTask}
             editTask={editTask}
+            completeTask={completeTask}
           />
         ))
       ) : (

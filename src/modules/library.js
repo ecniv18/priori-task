@@ -86,7 +86,6 @@ const LIBRARY = (function () {
   function editTask(id, value) {
     library[0].tasks = library[0].tasks.map((task) => {
       if (task.id === id) {
-        console.log(task.id === id);
         task.title = value.title;
         task.description = value.description;
         task.dueDate = value.dueDate;
@@ -94,7 +93,16 @@ const LIBRARY = (function () {
       }
       return task;
     });
+    updateLibrary(library);
+  }
 
+  function completeTask(id) {
+    library[0].tasks = library[0].tasks.map((task) => {
+      if (task.id === id) {
+        task.completed = !task.completed;
+      }
+      return task;
+    });
     updateLibrary(library);
   }
 
@@ -151,6 +159,7 @@ const LIBRARY = (function () {
     deleteProject,
     deleteTask,
     editTask,
+    completeTask,
   };
 })();
 
