@@ -3,9 +3,13 @@
   --clr-primary: #121212;
   --clr-secondary: #272727;
   --clr-secondary-2: #4b4b4b;
+  --clr-secondary-3: #c1c1c1;
   --clr-accent: #6eacda;
   --clr-accent-2: #0012203d;
+
   --clr-txt-light: #fff;
+  --clr-txt-dark: #333;
+  --clr-txt-dimmed: #c1c1c1;
 
   --standard-radius: 1.5rem;
 }
@@ -21,7 +25,7 @@
 html {
   font-size: 62.5%;
   background-color: var(--clr-primary);
-  color: var(--clr-txt-light);
+  color: var(--clr-txt-dimmed);
 }
 
 .btn {

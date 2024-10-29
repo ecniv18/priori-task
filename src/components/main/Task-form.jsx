@@ -1,8 +1,9 @@
+import LIBRARY from "../../global/LIBRARY";
 import ButtonComp from "../Button-comp";
 import { useState } from "react";
 
-export default function ProjectForm({ createProject }) {
-  const [nameValue, setNameValue] = useState("");
+export default function TaskForm({ createTask, closeForm }) {
+  const [descValue, setDescValue] = useState("");
 
   // Add Validation
   return (
@@ -10,14 +11,16 @@ export default function ProjectForm({ createProject }) {
       <input
         className='project-form-name'
         type='text'
-        onChange={(e) => setNameValue(e.target.value)}
-        value={nameValue}
-        maxLength={16}
+        onChange={(e) => setDescValue(e.target.value)}
+        value={descValue}
+        maxLength={30}
       />
       <ButtonComp
         onClick={(e) => {
           e.preventDefault();
-          createProject(nameValue);
+          if (LIBRARY.getActiveProject() === undefined) return;
+          createTask(descValue);
+          closeForm();
         }}
         className='project-form-button'
       >

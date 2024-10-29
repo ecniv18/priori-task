@@ -1,23 +1,27 @@
 import { useState } from "react";
-import "../../css/project.css";
+
 import ButtonComp from "../Button-comp";
 import ProjectMenu from "./Project-menu";
 
 export default function ProjectComp({
-  projectName,
-  id,
-  selectProject,
+  name,
+  activeStatus,
+  activateProject,
   deleteProject,
   editProject,
 }) {
   const [menuOpened, setMenuOpened] = useState(false);
   return (
-    <div className='project'>
+    <div id={activeStatus === true ? "active" : ""} className='project'>
       {menuOpened && (
-        <ProjectMenu editProject={editProject} deleteProject={deleteProject} />
+        <ProjectMenu
+          editProject={editProject}
+          deleteProject={deleteProject}
+          closeMenu={() => setMenuOpened(false)}
+        />
       )}
-      <h2 onClick={() => selectProject(id)} className='project-name'>
-        {projectName}
+      <h2 onClick={activateProject} className='project-name'>
+        {name}
       </h2>
       <ButtonComp
         onClick={() => setMenuOpened(!menuOpened)}

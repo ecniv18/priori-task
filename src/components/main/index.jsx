@@ -1,3 +1,29 @@
-export default function Main() {
-  return <main className='main'>Main</main>;
+import "../../css/main/main.css";
+import ButtonComp from "../Button-comp";
+import Tab from "./Tab";
+import { useState } from "react";
+
+export default function Main({ taskList, createTask }) {
+  const [creationMode, setCreationMode] = useState(false);
+  return (
+    <main className='main'>
+      <Tab
+        heading='Tasks'
+        className='tasks'
+        taskList={taskList}
+        creationMode={creationMode}
+        closeForm={() => setCreationMode(false)}
+        createTask={createTask}
+      >
+        <ButtonComp
+          onClick={() => setCreationMode(!creationMode)}
+          className='tasks_add-button'
+        >
+          <img src='src/asset/icons/add_icon.svg' alt='add task icon' />
+        </ButtonComp>
+      </Tab>
+      <Tab heading='Working' className='working' taskList={taskList} />
+      <Tab heading='Finished' className='finished' taskList={taskList} />
+    </main>
+  );
 }

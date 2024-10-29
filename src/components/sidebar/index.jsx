@@ -1,9 +1,16 @@
+import "../../css/sidebar/sidebar.css";
+import "../../css/sidebar/project.css";
 import { useState } from "react";
 import ButtonComp from "../Button-comp";
 import ProjectComp from "./Project-comp";
 import ProjectForm from "./Project-form";
 
-export default function SideBar({ projectList, createProject, deleteProject }) {
+export default function SideBar({
+  projectList,
+  createProject,
+  deleteProject,
+  activateProject,
+}) {
   const [creationMode, setCreationMode] = useState(false);
 
   return (
@@ -30,8 +37,9 @@ export default function SideBar({ projectList, createProject, deleteProject }) {
           return (
             <li key={p.id}>
               <ProjectComp
-                projectName={p.name}
-                id={p.id}
+                name={p.name}
+                activeStatus={p.active}
+                activateProject={() => activateProject(p.id)}
                 deleteProject={() => deleteProject(p.id)}
               />
             </li>
