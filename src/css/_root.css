@@ -1,0 +1,76 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --clr-primary: #121212;
+  --clr-secondary: #272727;
+  --clr-secondary-2: #4b4b4b;
+  --clr-accent: #6eacda;
+  --clr-accent-2: #0012203d;
+  --clr-txt-light: #fff;
+
+  --standard-radius: 1.5rem;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+  background-color: var(--clr-primary);
+  color: var(--clr-txt-light);
+}
+
+.btn {
+  padding: 0.5em 1em;
+  background: none;
+  border: 1px solid var(--clr-accent);
+  color: var(--clr-accent);
+  background-color: var(--clr-accent-2);
+  border-radius: var(--standard-radius);
+  cursor: pointer;
+  position: relative;
+}
+
+.btn:hover {
+  background-color: var(--clr-secondary-2);
+}
+
+.btn:active {
+  scale: 1.05;
+}
+
+*::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  font-size: 1.6rem;
+  display: flex;
+  padding: 3rem;
+  gap: 2rem;
+}
+
+.wrapper > * {
+  height: 90vh;
+  border-radius: var(--standard-radius);
+  padding: 2rem;
+  border: 1px solid var(--clr-secondary);
+}
+
+.wrapper > :first-child {
+  width: 22%;
+}
+
+.wrapper > :last-child {
+  width: 78%;
+}
