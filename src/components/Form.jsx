@@ -2,11 +2,11 @@ import "../css/form.css";
 import LIBRARY from "../global/LIBRARY";
 import ButtonComp from "./Button-comp";
 import { useState } from "react";
+import addIconSvg from "../asset/icons/add_icon.svg";
 
 export default function Form({
   type, // 'project', 'task'
-  mode = "read", // 'modify'
-  className,
+  mode = "read", // 'modify' // impletment modification of project or task
   submitFunc,
   closeFormFunc,
 }) {
@@ -44,7 +44,7 @@ export default function Form({
         }}
         className='form-submit_button'
       >
-        <img src='src/asset/icons/add_icon.svg' alt='create icon' />
+        <img src={addIconSvg} alt='create icon' />
       </ButtonComp>
     </div>
   );

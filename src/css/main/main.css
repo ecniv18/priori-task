@@ -34,7 +34,7 @@
 .task-list {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -50,4 +50,9 @@
 .task > :first-child {
   display: flex;
   justify-content: space-between;
+}
+
+.task p {
+  text-wrap: wrap;
+  word-break: break-all;
 }

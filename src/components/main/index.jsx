@@ -2,6 +2,7 @@ import "../../css/main/main.css";
 import ButtonComp from "../Button-comp";
 import Tab from "./Tab";
 import { useState } from "react";
+import addIconSvg from "../../asset/icons/add_icon.svg";
 
 export default function Main({ taskList, createTask, deleteTask, moveTaskTo }) {
   const [creationMode, setCreationMode] = useState(false);
@@ -22,7 +23,7 @@ export default function Main({ taskList, createTask, deleteTask, moveTaskTo }) {
           onClick={() => setCreationMode(!creationMode)}
           className='tasks_add-button'
         >
-          <img src='src/asset/icons/add_icon.svg' alt='add task icon' />
+          <img src={addIconSvg} alt='add task icon' />
         </ButtonComp>
       </Tab>
       <Tab

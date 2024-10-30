@@ -1,7 +1,7 @@
 import { useState } from "react";
-
 import ButtonComp from "../Button-comp";
 import ProjectMenu from "./Project-menu";
+import menuIconSvg from "../../asset/icons/menu_icon.svg";
 
 export default function ProjectComp({
   name,
@@ -29,7 +29,7 @@ export default function ProjectComp({
         onClick={() => setMenuOpened(!menuOpened)}
         className='project-option-button'
       >
-        <img src='src/asset/icons/menu_icon.svg' alt='menu icon' />
+        <img src={menuIconSvg} alt='menu icon' />
       </ButtonComp>
     </div>
   );

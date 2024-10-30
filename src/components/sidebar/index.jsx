@@ -1,5 +1,6 @@
 import "../../css/sidebar/sidebar.css";
 import "../../css/sidebar/project.css";
+import addIconSvg from "../../asset/icons/add_icon.svg";
 import { useState } from "react";
 import ButtonComp from "../Button-comp";
 import ProjectComp from "./Project-comp";
@@ -19,7 +20,7 @@ export default function SideBar({
         onClick={() => setCreationMode(!creationMode)}
         className={"create-propject-btn btn"}
       >
-        <img src='src/asset/icons/add_icon.svg' alt='Add Project' />
+        <img src={addIconSvg} alt='Add Project' />
       </ButtonComp>
 
       <ul className='sidebar_project-list'>

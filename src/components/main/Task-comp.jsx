@@ -1,4 +1,5 @@
 import ButtonComp from "../Button-comp";
+import deleteIconSvg from "../../asset/icons/delete_icon.svg";
 
 export default function TaskComp({ task, deleteTask, moveTaskTo }) {
   function nextTab() {
@@ -17,7 +18,7 @@ export default function TaskComp({ task, deleteTask, moveTaskTo }) {
       <div>
         <p className='task-description'>{task.description}</p>
         <ButtonComp className='task-delete-button' onClick={deleteTask}>
-          <img src='src/asset/icons/delete_icon.svg' alt='delete icon' />
+          <img src={deleteIconSvg} alt='delete icon' />
         </ButtonComp>
       </div>
       {task.tab !== "finished" ? (
