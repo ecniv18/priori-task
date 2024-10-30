@@ -2,8 +2,7 @@
   color: var(--clr-accent);
 }
 
-.project,
-.project-form {
+.project {
   display: grid;
   grid-template-columns: 5fr 1fr;
   gap: 1rem;
@@ -15,8 +14,7 @@
   padding: 2px;
 }
 
-.project-name,
-.project-form-name {
+.project-name {
   font-size: 1.6rem;
   display: grid;
   align-items: center;
@@ -26,19 +24,7 @@
   margin: 1rem 0.5rem;
 }
 
-.project-form-name {
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid var(--clr-secondary);
-}
-
-.project-form-name:focus {
-  outline: transparent;
-  caret-color: var(--clr-txt-light);
-}
-
-.project-option-button,
-.project-form-button {
+.project-option-button {
   scale: 0.8;
   border: none;
 }

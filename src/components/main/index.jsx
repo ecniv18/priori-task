@@ -3,8 +3,9 @@ import ButtonComp from "../Button-comp";
 import Tab from "./Tab";
 import { useState } from "react";
 
-export default function Main({ taskList, createTask }) {
+export default function Main({ taskList, createTask, deleteTask, moveTaskTo }) {
   const [creationMode, setCreationMode] = useState(false);
+
   return (
     <main className='main'>
       <Tab
@@ -14,6 +15,8 @@ export default function Main({ taskList, createTask }) {
         creationMode={creationMode}
         closeForm={() => setCreationMode(false)}
         createTask={createTask}
+        deleteTask={deleteTask}
+        moveTaskTo={moveTaskTo}
       >
         <ButtonComp
           onClick={() => setCreationMode(!creationMode)}
@@ -22,8 +25,22 @@ export default function Main({ taskList, createTask }) {
           <img src='src/asset/icons/add_icon.svg' alt='add task icon' />
         </ButtonComp>
       </Tab>
-      <Tab heading='Working' className='working' taskList={taskList} />
-      <Tab heading='Finished' className='finished' taskList={taskList} />
+      <Tab
+        heading='Working'
+        className='working'
+        taskList={taskList}
+        createTask={createTask}
+        deleteTask={deleteTask}
+        moveTaskTo={moveTaskTo}
+      />
+      <Tab
+        heading='Finished'
+        className='finished'
+        taskList={taskList}
+        createTask={createTask}
+        deleteTask={deleteTask}
+        moveTaskTo={moveTaskTo}
+      />
     </main>
   );
 }

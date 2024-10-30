@@ -21,11 +21,17 @@ export default (function LIBRARY() {
     const newList = getProjects();
     newList.unshift(project);
     updateStorage(newList);
+    activateProject(project.id);
   }
 
   function deleteProject(id) {
     const newList = getProjects().filter((p) => p.id !== id);
     updateStorage(newList);
+    if (!getActiveProject()) {
+      if (getProjects().length > 0) {
+        activateProject(getProjects()[0].id);
+      }
+    }
   }
 
   function activateProject(id) {
@@ -51,12 +57,22 @@ export default (function LIBRARY() {
     const task = {
       description,
       projectId: getActiveProject().id,
-      id: uuidv4,
-      tab: "tasks",
+      id: uuidv4(),
+      tab: "tasks", // "working", "finished"
     };
     const newList = getProjects().map((p) => {
       if (p.id === getActiveProject().id) {
         p.list.unshift(task);
+      }
+      return p;
+    });
+    updateStorage(newList);
+  }
+
+  function deleteTask(id) {
+    const newList = getProjects().map((p) => {
+      if (p.active) {
+        p.list = p.list.filter((t) => t.id !== id);
       }
       return p;
     });
@@ -70,6 +86,26 @@ export default (function LIBRARY() {
     return getActiveProject().list;
   }
 
+  function moveTaskTo(id) {
+    const newList = getProjects().map((p) => {
+      if (p.active) {
+        p.list = p.list.map((t) => {
+          if (t.id === id) {
+            if (t.tab === "tasks") {
+              t.tab = "working";
+            } else if (t.tab === "working") {
+              t.tab = "finished";
+            }
+          }
+          return t;
+        });
+      }
+      return p;
+    });
+
+    updateStorage(newList);
+  }
+
   return {
     // PROJECT
     getProjects,
@@ -79,6 +115,8 @@ export default (function LIBRARY() {
     getActiveProject,
     // TASK
     createTask,
+    deleteTask,
     getActiveProjectTasks,
+    moveTaskTo,
   };
 })();

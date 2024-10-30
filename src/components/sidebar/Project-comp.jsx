@@ -11,6 +11,8 @@ export default function ProjectComp({
   editProject,
 }) {
   const [menuOpened, setMenuOpened] = useState(false);
+  const [draggingStatus, setDraggingStatus] = useState(false);
+
   return (
     <div id={activeStatus === true ? "active" : ""} className='project'>
       {menuOpened && (

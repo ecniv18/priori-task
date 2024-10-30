@@ -3,7 +3,7 @@ import "../../css/sidebar/project.css";
 import { useState } from "react";
 import ButtonComp from "../Button-comp";
 import ProjectComp from "./Project-comp";
-import ProjectForm from "./Project-form";
+import Form from "../Form";
 
 export default function SideBar({
   projectList,
@@ -25,11 +25,9 @@ export default function SideBar({
       <ul className='sidebar_project-list'>
         {creationMode && (
           <li>
-            <ProjectForm
-              createProject={(name) => {
-                createProject(name);
-                setCreationMode(false);
-              }}
+            <Form
+              submitFunc={createProject}
+              closeFormFunc={() => setCreationMode(false)}
             />
           </li>
         )}

@@ -28,6 +28,11 @@ html {
   color: var(--clr-txt-dimmed);
 }
 
+input {
+  caret-color: auto;
+  color: var(--clr-secondary-3);
+}
+
 .btn {
   padding: 0.5em 1em;
   background: none;

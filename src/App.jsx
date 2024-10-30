@@ -29,13 +29,22 @@ function App() {
 
   function activateProject(id) {
     LIBRARY.activateProject(id);
-    console.log("project activated");
     updateProjectList();
     updateTaskList();
   }
 
   function createTask(description) {
     LIBRARY.createTask(description);
+    updateTaskList();
+  }
+
+  function deleteTask(id) {
+    LIBRARY.deleteTask(id);
+    updateTaskList();
+  }
+
+  function moveTaskTo(id) {
+    LIBRARY.moveTaskTo(id);
     updateTaskList();
   }
 
@@ -47,7 +56,12 @@ function App() {
         deleteProject={deleteProject}
         activateProject={activateProject}
       />
-      <Main taskList={taskList} createTask={createTask} />
+      <Main
+        taskList={taskList}
+        createTask={createTask}
+        deleteTask={deleteTask}
+        moveTaskTo={moveTaskTo}
+      />
     </div>
   );
 }

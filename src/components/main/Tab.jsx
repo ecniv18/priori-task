@@ -1,5 +1,5 @@
+import Form from "../Form";
 import TaskComp from "./Task-comp";
-import TaskForm from "./Task-form";
 
 export default function Tab({
   heading,
@@ -9,16 +9,12 @@ export default function Tab({
   taskList,
   createTask,
   deleteTask,
-  mouseDownDrag,
+  moveTaskTo,
   closeForm,
 }) {
-  function noTaskMsg() {
+  function NoTaskMsg() {
     if (heading === "Tasks") {
       return <p>No Tasks yet..</p>;
-    } else if (heading === "Working") {
-      return <p>You're Not Currently Working..</p>;
-    } else if (heading === "Finished") {
-      return <p>No Finished Tasks</p>;
     }
   }
 
@@ -30,18 +26,21 @@ export default function Tab({
       </header>
       <ul className='task-list'>
         {creationMode && (
-          <TaskForm createTask={createTask} closeForm={closeForm} />
+          <Form type='task' submitFunc={createTask} closeFormFunc={closeForm} />
         )}
-        {taskList.length === 0 && noTaskMsg()}
+        {taskList.length === 0 && <NoTaskMsg />}
         {taskList.length > 0 &&
           taskList.map((t) => {
             if (heading.toLowerCase() === t.tab) {
               return (
                 <li key={t.id}>
                   <TaskComp
-                    description={t.description}
+                    task={t}
                     deleteTask={() => deleteTask(t.id)}
-                    mouseDownDrag={mouseDownDrag} // TODO: make the taks draggable / write the code for mouseDownDrag
+                    moveTaskTo={() => {
+                      console.log(t.id);
+                      moveTaskTo(t.id);
+                    }}
                   />
                 </li>
               );
