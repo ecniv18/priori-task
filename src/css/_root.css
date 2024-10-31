@@ -7,6 +7,9 @@
   --clr-accent: #6eacda;
   --clr-accent-2: #0012203d;
 
+  --clr-error: #721b1b;
+  --clr-error-2: #b35b5b;
+
   --clr-txt-light: #fff;
   --clr-txt-dark: #333;
   --clr-txt-dimmed: #c1c1c1;
@@ -52,8 +55,8 @@ input {
   scale: 1.05;
 }
 
-*::-webkit-scrollbar {
-  background-color: transparent;
+::-webkit-scrollbar {
+  background: none;
 }
 
 ul {

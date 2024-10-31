@@ -19,6 +19,7 @@ function App() {
   function createProject(name) {
     LIBRARY.createProject(name);
     updateProjectList();
+    updateTaskList();
   }
 
   function deleteProject(id) {

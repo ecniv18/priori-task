@@ -3,9 +3,16 @@ import { v4 as uuidv4 } from "uuid";
 export default (function LIBRARY() {
   // STORAGE METHODS
   function getProjects() {
+    const defaultProjectId = uuidv4();
     if (localStorage.length === 0) {
       // creates an object on the localStorage for the first time only
-      localStorage.setItem("projects", JSON.stringify([]));
+      localStorage.setItem(
+        "projects",
+        JSON.stringify([
+          { name: "Untitled", id: defaultProjectId, list: [], active: true },
+        ])
+      );
+      activateProject(defaultProjectId);
     }
     return JSON.parse(localStorage.projects);
   }
